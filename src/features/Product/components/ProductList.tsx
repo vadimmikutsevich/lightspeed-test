@@ -2,8 +2,12 @@ import { useGetProducts } from "../hooks/useGetProducts";
 import { Loader } from "@/components/ui/loader";
 import ProductListItem from "./ProductListItem";
 
-export default function ProductList() {
-  const { data, isLoading, isError } = useGetProducts();
+interface Props {
+  categoryId?: number;
+}
+
+export default function ProductList({ categoryId }: Props) {
+  const { data, isLoading, isError } = useGetProducts(categoryId);
 
   if (isLoading) {
     return <Loader />;

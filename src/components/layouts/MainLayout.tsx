@@ -10,7 +10,7 @@ export default function MainLayout() {
   const location = useLocation();
   const outlet = useOutlet();
   const { items } = useCartStore();
-  const cartCount = items.length;
+  const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   function getLayoutKey(pathname: string) {

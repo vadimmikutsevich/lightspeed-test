@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
 import type { Product } from "@/types";
 import { useCartStore } from "@/features/Cart/store/cart";
+import ProductQuantityControl from "./ProductQuantityControl";
 
 interface Props {
   className?: string;
@@ -10,7 +10,8 @@ interface Props {
 }
 
 export default function ProductListItem({ product }: Props) {
-  const addItem = useCartStore((s) => s.addItem);
+  const { addItem, decrementItem, items } = useCartStore();
+  const inCart = items.find((i) => i.id === product.id);
 
   return (
     <Card key={product.id} className="bg-pure-white shadow-sm flex flex-col">
@@ -24,7 +25,7 @@ export default function ProductListItem({ product }: Props) {
         {product.thumbnailUrl && (
           <div
             className="h-56 flex items-center justify-center rounded-md 
-                bg-[repeating-linear-gradient(90deg,#ffffff,#ffffff_8px,#e5e7eb_8px,#e5e7eb_16px)]"
+              bg-[repeating-linear-gradient(90deg,#ffffff,#ffffff_8px,#e5e7eb_8px,#e5e7eb_16px)]"
           >
             <img
               src={product.thumbnailUrl}
@@ -40,19 +41,34 @@ export default function ProductListItem({ product }: Props) {
 
         <div className="flex-1" />
 
-        <Button
-          className="bg-accent-blue text-pure-white hover:bg-accent-blue/90 w-full"
-          onClick={() =>
-            addItem({
-              id: product.id,
-              name: product.name,
-              price: product.price,
-              thumbnailUrl: product.thumbnailUrl,
-            })
-          }
-        >
-          Buy
-        </Button>
+        {inCart ? (
+          <ProductQuantityControl
+            quantity={inCart.quantity}
+            onDecrement={() => decrementItem(product.id)}
+            onIncrement={() =>
+              addItem({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                thumbnailUrl: product.thumbnailUrl,
+              })
+            }
+          />
+        ) : (
+          <Button
+            className="bg-accent-blue text-pure-white hover:bg-accent-blue/90 w-full"
+            onClick={() =>
+              addItem({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                thumbnailUrl: product.thumbnailUrl,
+              })
+            }
+          >
+            Buy
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

@@ -24,7 +24,7 @@ export default function ProductListItem({ product }: Props) {
       <CardContent className="flex flex-col flex-1 space-y-4">
         {product.thumbnailUrl && (
           <div
-            className="h-56 flex items-center justify-center rounded-md 
+            className="h-56 flex items-center justify-center
               bg-[repeating-linear-gradient(90deg,#ffffff,#ffffff_8px,#e5e7eb_8px,#e5e7eb_16px)]"
           >
             <img

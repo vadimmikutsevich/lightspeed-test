@@ -17,7 +17,7 @@ export default function ProductQuantityControl({
       <Button
         variant="outline"
         size="icon"
-        className="bg-concrete-gray text-charcoal-black hover:bg-concrete-gray/80 w-1/4"
+        className="bg-concrete-gray/50 text-charcoal-black hover:bg-concrete-gray/80 w-1/2 sm:w-1/3"
         onClick={onDecrement}
       >
         <Minus className="h-4 w-4" />
@@ -28,7 +28,7 @@ export default function ProductQuantityControl({
       <Button
         variant="outline"
         size="icon"
-        className="bg-accent-blue text-pure-white hover:bg-accent-blue/90 w-1/4"
+        className="bg-accent-blue text-pure-white hover:bg-accent-blue/90 w-1/2 sm:w-1/3"
         onClick={onIncrement}
       >
         <Plus className="h-4 w-4" />

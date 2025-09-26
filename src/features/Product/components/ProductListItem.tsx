@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/types";
@@ -17,24 +19,27 @@ export default function ProductListItem({ product }: Props) {
     <Card key={product.id} className="bg-pure-white shadow-sm flex flex-col">
       <CardHeader>
         <CardTitle className="text-charcoal-black line-clamp-2">
-          {product.name}
+          <Link to={`/product/${product.id}`} className="hover:underline">
+            {product.name}
+          </Link>
         </CardTitle>
       </CardHeader>
 
       <CardContent className="flex flex-col flex-1 space-y-4">
-        {product.thumbnailUrl && (
-          <div
-            className="h-56 flex items-center justify-center
+        <Link to={`/product/${product.id}`}>
+          {product.thumbnailUrl && (
+            <div
+              className="h-56 flex items-center justify-center
               bg-[repeating-linear-gradient(90deg,#ffffff,#ffffff_8px,#e5e7eb_8px,#e5e7eb_16px)]"
-          >
-            <img
-              src={product.thumbnailUrl}
-              alt={product.name}
-              className="max-h-full max-w-full object-contain"
-            />
-          </div>
-        )}
-
+            >
+              <img
+                src={product.thumbnailUrl}
+                alt={product.name}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+          )}
+        </Link>
         <p className="text-lg font-semibold text-accent-blue">
           ${product.price.toFixed(2)}
         </p>
